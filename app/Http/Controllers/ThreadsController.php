@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Thread;
+use Illuminate\Http\Request;
+
+class ThreadsController extends Controller
+{
+    public function index()
+    {
+        $threads = Thread::latest()->get();
+
+        return \view('threads.index', \compact('threads'));
+    }
+
+    public function create()
+    {
+        //
+    }
+
+    public function store(Request $request)
+    {
+        //
+    }
+
+    public function show(Thread $thread)
+    {
+        return \view('threads.show', \compact('thread'));
+    }
+
+    public function edit(Thread $thread)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Thread  $thread
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Thread $thread)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Thread  $thread
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Thread $thread)
+    {
+        //
+    }
+}
