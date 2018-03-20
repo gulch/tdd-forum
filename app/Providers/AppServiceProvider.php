@@ -16,7 +16,11 @@ class AppServiceProvider extends ServiceProvider
     {
         //\View::share('channels', Channel::all());
         \View::composer('*', function ($view) {
-            $view->with('channels', Channel::all());
+            $channels = \Cache::rememberForever('channels', function () {
+                return Channel::all();
+            });
+
+            $view->with('channels', $channels);
         });
     }
 
@@ -29,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
     {
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        }
+
+        if ($this->app->isLocal()) {
+            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
         }
     }
 }
