@@ -18,6 +18,10 @@ class ThreadsController extends Controller
     {
         $threads = $this->getThreads($channel, $filters);
 
+        if (request()->wantsJson()) {
+            return $threads;
+        }
+
         return \view('threads.index', \compact('threads'));
     }
 
@@ -56,24 +60,11 @@ class ThreadsController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Thread  $thread
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Thread $thread)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Thread  $thread
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Thread $thread)
     {
         //
