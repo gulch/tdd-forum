@@ -11,13 +11,14 @@
                     {{ $reply->created_at->diffForHumans() }}...
                 </h5>
                 <div>
-                    <form method="post" action="/replies/{{ $reply->id }}/favorites">
+                    <favorite :reply="{{ $reply }}"></favorite>
+                    {{--<form method="post" action="/replies/{{ $reply->id }}/favorites">
                         {{ csrf_field() }}
                         <button class="btn btn-default" {{ $reply->isFavorited() ? 'disabled' : '' }}>
                             {{ $reply->favorites_count }}
                             {{ str_plural('favorite', $reply->favorites_count) }}
                         </button>
-                    </form>
+                    </form>--}}
                 </div>
             </div>
 

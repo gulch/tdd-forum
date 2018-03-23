@@ -1,6 +1,8 @@
 <script>
+    import Favorite from './Favorite.vue';
     export default {
         props: ['attributes'],
+        component: { Favorite },
         data() {
             return {
                 editing: false,
