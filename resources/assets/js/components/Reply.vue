@@ -15,7 +15,14 @@
 
                 this.editing = false;
 
-                flash('Updated!')
+                $(this.$el).fadeOut(() => {
+                    flash('Updated!');
+                });
+            },
+            destroy() {
+                axios.delete('/replies/' + this.attributes.id);
+
+                flash('Reply has been deleted.');
             }
         }
     }
