@@ -10,16 +10,11 @@
                     said
                     {{ $reply->created_at->diffForHumans() }}...
                 </h5>
-                <div>
-                    <favorite :reply="{{ $reply }}"></favorite>
-                    {{--<form method="post" action="/replies/{{ $reply->id }}/favorites">
-                        {{ csrf_field() }}
-                        <button class="btn btn-default" {{ $reply->isFavorited() ? 'disabled' : '' }}>
-                            {{ $reply->favorites_count }}
-                            {{ str_plural('favorite', $reply->favorites_count) }}
-                        </button>
-                    </form>--}}
-                </div>
+                @if(auth()->check())
+                    <div>
+                        <favorite :reply="{{ $reply }}"></favorite>
+                    </div>
+                @endif
             </div>
 
         </div>
