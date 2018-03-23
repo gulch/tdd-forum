@@ -10,6 +10,14 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <script>
+        window.App = {!! json_encode([
+            'csrfToken' => csrf_token(),
+            'signedIn' => auth()->check(),
+            'user' => auth()->user(),
+        ]) !!};
+    </script>
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
@@ -29,6 +37,7 @@
         .mr-1 {
             margin-right: 1em;
         }
+
         [v-cloak] {
             display: none;
         }
