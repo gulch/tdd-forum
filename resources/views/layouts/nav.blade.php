@@ -33,6 +33,7 @@
                         @endif
 
                         <li><a href="/threads?popular=1">Popular Threads</a></li>
+                        <li><a href="/threads?unanswered=1">Unanswered Threads</a></li>
                     </ul>
                 </li>
                 <li>
@@ -68,8 +69,8 @@
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                >
                                     Logout
                                 </a>
 

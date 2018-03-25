@@ -16,7 +16,7 @@
     import collection from '../mixins/collection';
 
     export default {
-        components: { Reply, NewReply },
+        components: {Reply, NewReply},
         mixins: [collection],
         data() {
             return {
@@ -33,6 +33,8 @@
             refresh({data}) {
                 this.dataSet = data;
                 this.items = data.data;
+
+                window.scrollTo(0, 0);
             },
             url(page) {
                 if (!page) {
