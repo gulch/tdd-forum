@@ -55,16 +55,6 @@ class ThreadsController extends Controller
         ]);
     }
 
-    public function edit(Thread $thread)
-    {
-        //
-    }
-
-    public function update(Request $request, Thread $thread)
-    {
-        //
-    }
-
     public function destroy($channel, Thread $thread)
     {
         $this->authorize('update', $thread);
