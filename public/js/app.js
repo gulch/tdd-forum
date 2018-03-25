@@ -18263,8 +18263,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['endpoint'],
-
     data: function data() {
         return {
             body: ''
@@ -18282,7 +18280,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addReply: function addReply() {
             var _this = this;
 
-            axios.post(this.endpoint, { body: this.body }).then(function (_ref) {
+            axios.post(location.pathname + '/replies', { body: this.body }).then(function (_ref) {
                 var data = _ref.data;
 
                 _this.body = '';
@@ -18332,7 +18330,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.nextUrl = this.dataSet.next_page_url;
         },
         page: function page() {
-            this.broadcast();
+            this.broadcast().updateUrl();
         }
     },
     computed: {
@@ -18343,7 +18341,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         broadcast: function broadcast() {
-            this.$emit('updated', this.page);
+            return this.$emit('changed', this.page);
+        },
+        updateUrl: function updateUrl() {
+            history.pushState(null, null, '?page=' + this.page);
         }
     }
 });
@@ -18381,8 +18382,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mixins: [__WEBPACK_IMPORTED_MODULE_2__mixins_collection__["a" /* default */]],
     data: function data() {
         return {
-            dataSet: false,
-            endpoint: location.pathname + '/replies'
+            dataSet: false
         };
     },
     created: function created() {
@@ -18398,10 +18398,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.dataSet = data;
             this.items = data.data;
-        },
-        url: function url() {
-            var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
+            window.scrollTo(0, 0);
+        },
+        url: function url(page) {
+            if (!page) {
+                var query = location.search.match(/page=(\d+)/);
+
+                page = query ? query[1] : 1;
+            }
             return location.pathname + '/replies?page=' + page;
         }
     }
@@ -49374,12 +49379,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "dataSet": _vm.dataSet
     },
     on: {
-      "updated": _vm.fetch
+      "changed": _vm.fetch
     }
   }), _vm._v(" "), _c('new-reply', {
-    attrs: {
-      "endpoint": _vm.endpoint
-    },
     on: {
       "created": _vm.add
     }
